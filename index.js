@@ -9,10 +9,12 @@ const users = require('./routes/users');
 connection();
 const app = express();
 
+/* MIDDLEWARE */
+app.use(express.json());
+
 /* USANDO ROUTES */
 users(app)
 
-app.use(express.json());
 
 
 app.listen(port, () => {

@@ -14,7 +14,7 @@ const UserSchema = Schema({
     type: String,
     required: [true, 'password is required'],
   },
-  image: {
+ /*  image: {
     type: String,
   },
   rol: {
@@ -25,7 +25,7 @@ const UserSchema = Schema({
   state: {
     type: Boolean,
     default: true,
-  },
+  }, */
 
   country: {
     type: String,
