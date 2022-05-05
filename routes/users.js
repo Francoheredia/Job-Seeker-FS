@@ -12,18 +12,18 @@ function users(app) {
 		const users = await usersservices.getAll() /* ARRAY USUARIOS */
 		return res.json(users)
 	})
-
 	router.post('/', async (req, res) => {
 		const user = await usersservices.create(req.body)
 		return res.json(user)
 	})
-
-	router.put('/:id', (req, res) => { })
-	/* router.delete('/:id', async (req, res) => {
-		const id = req.params.id
-		const userdelete = await usersservices.userdelete(id);
-		return res.json(userdelete)
-	 }) */
+	router.put('/:id', async (req, res) => {
+		const user = await usersservices.update(req.params.id, req.body)
+		return res.json(user)
+	})
+	router.delete('/:id', async (req, res) => {
+		const user = await usersservices.delete(req.params.id);
+		return res.json(user)
+	})
 }
 
 module.exports = users 

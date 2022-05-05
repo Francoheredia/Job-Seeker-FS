@@ -4,6 +4,7 @@ const { connection } = require('./config/db');
 
 /* IMPORTACION ROUTES */
 const users = require('./routes/users');
+const auth = require('./routes/auth');
 
 
 connection();
@@ -14,7 +15,7 @@ app.use(express.json());
 
 /* USANDO ROUTES */
 users(app)
-
+auth(app)
 
 
 app.listen(port, () => {

@@ -19,17 +19,19 @@ class Users {
 		}
 	}
 
-	async update(data){
+	async update(id, data) {
 		try {
-			
+			const userupdate = await Usermodel.findByIdAndUpdate(id, data, { new: true })
+			return userupdate
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
-	async userdelete(){
+	async delete(id) {
 		try {
-			
+			const userdelete = await Usermodel.findByIdAndDelete(id)
+			return userdelete
 		} catch (error) {
 			console.log(error);
 		}
