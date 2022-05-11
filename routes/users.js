@@ -1,5 +1,6 @@
 const express = require('express');
 const Usersservices = require('../services/usersservices')
+const authValidation = require('../middleware/authValidation')
 
 function users(app) {
 
@@ -8,7 +9,8 @@ function users(app) {
 
 	app.use('/api/users', router)
 
-	router.get('/', async (req, res) => {
+	router.get("/", ...authValidation("admin"), async (req, res) => {
+		console.log(req.user)
 		const users = await usersservices.getAll() /* ARRAY USUARIOS */
 		return res.json(users)
 	})

@@ -14,19 +14,18 @@ const UserSchema = Schema({
     type: String,
     required: [true, 'password is required'],
   },
- /*  image: {
-    type: String,
-  },
-  rol: {
+  /*  image: {
+     type: String,
+   },*/
+  role: {
     type: String,
     required: [true, 'rol is required'],
-    enum: ['Admin', 'Empleador', 'Postulante'],
+    enum:["Applicant","Employer","Admin"]
   },
-  state: {
+  /*state: {
     type: Boolean,
     default: true,
   }, */
-
   country: {
     type: String,
     required: [true, 'country is required'],

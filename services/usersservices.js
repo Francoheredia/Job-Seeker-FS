@@ -9,13 +9,27 @@ class Users {
 			console.log(error);
 		}
 	}
+	async getByEmail(email) {
+		try {
+			const user = await Usermodel.findOne({ email })
+			return user
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	async create(data) {
 		try {
 			const user = await Usermodel.create(data)
 			return user
 		} catch (error) {
-			console.log(error);
+			if (error.code === 11000) {
+				const message = `El correo "${error.keyValue.email}" ya esta en uso`
+				return {
+					error: true,
+					message
+				}
+			}
 		}
 	}
 
