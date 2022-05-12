@@ -8,12 +8,13 @@ function jobs(app) {
   app.use('/api/jobs', router);
   router.post('/', async (req, res) => {
     const {
-      body: { name, categories, country },
+      body: { name, categories, country, rangePrice },
     } = req;
     const newJob = {
       name,
       categories,
       country,
+      rangePrice,
     };
 
     const Job = await JobsServices.add(newJob);
@@ -29,7 +30,7 @@ function jobs(app) {
       : res.status(404).json({ message: 'Error algo salio mal' });
   });
 
-  router.get('/filter', async (req, res) => {
+  router.get('/filter/category', async (req, res) => {
     const {
       query: { category },
     } = req;
@@ -37,6 +38,39 @@ function jobs(app) {
     const filtered = await JobsServices.filterCategories(category);
     filtered
       ? res.status(200).json({ message: 'Request exitosa', filtered })
+      : res.status(404).json({ message: 'Error algo salio mal' });
+  });
+  router.get('/filter/country', async (req, res) => {
+    const {
+      query: { country },
+    } = req;
+
+    const filtered = await JobsServices.filterByCountry(country);
+
+    filtered
+      ? res.status(200).json({ message: 'Request exitosa', filtered })
+      : res.status(404).json({ message: 'Error algo salio mal' });
+  });
+
+  router.get('/filter/rangeprice', async (req, res) => {
+    const {
+      query: { price },
+    } = req;
+    const filtered = await JobsServices.orderByRange(price);
+    console.log(filtered);
+    filtered
+      ? res.status(200).json({ message: 'Request exitosa', filtered })
+      : res.status(404).json({ message: 'Error algo salio mal' });
+  });
+
+  router.delete('/:id', async (req, res) => {
+    const {
+      params: { id },
+    } = req;
+
+    const josbdelete = await JobsServices.delete(id);
+    josbdelete
+      ? res.status(200).json({ message: 'Request exitosa', josbdelete })
       : res.status(404).json({ message: 'Error algo salio mal' });
   });
 }

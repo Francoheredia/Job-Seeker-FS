@@ -23,6 +23,36 @@ class Jobs {
       console.log(error);
     }
   }
+
+  async filterByCountry(country) {
+    try {
+      const filtered = await jobs.find({ country: country });
+      return filtered;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async orderByRange(price) {
+    try {
+      const filtered = await jobs.find({ rangePrice: { $lte: price } });
+      console.log(filtered);
+      const filterTota = filtered.sort();
+
+      return filterTota;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async delete(id) {
+    try {
+      const deleteProduct = await jobs.findByIdAndDelete(id);
+      return deleteProduct;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = Jobs;

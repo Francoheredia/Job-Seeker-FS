@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const { Schema, model } = require('mongoose');
 
 const JobSchema = Schema(
@@ -15,6 +16,11 @@ const JobSchema = Schema(
     country: {
       type: String,
       required: [true, 'country is  required'],
+    },
+    rangePrice: {
+      type: Number,
+      // type: mongoose.Types.Decimal128,
+      required: [true, 'rangePrice is required'],
     },
   },
   {
