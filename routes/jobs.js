@@ -36,9 +36,9 @@ function jobs(app) {
     } = req;
 
     const filtered = await JobsServices.filterCategories(category);
-    filtered
+    filtered.length > 0
       ? res.status(200).json({ message: 'Request exitosa', filtered })
-      : res.status(404).json({ message: 'Error algo salio mal' });
+      : res.status(404).json({ message: `No tenemos trabajos en esta categoria ` + category });
   });
   router.get('/filter/country', async (req, res) => {
     const {
@@ -47,9 +47,9 @@ function jobs(app) {
 
     const filtered = await JobsServices.filterByCountry(country);
 
-    filtered
+    filtered.length > 0
       ? res.status(200).json({ message: 'Request exitosa', filtered })
-      : res.status(404).json({ message: 'Error algo salio mal' });
+      : res.status(404).json({ message: `No hay registro en ` + country });
   });
 
   router.get('/filter/rangeprice', async (req, res) => {
