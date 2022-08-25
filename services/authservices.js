@@ -9,8 +9,8 @@ class Auth {
     // const password = data.password
     const { email, password } = data;
     const userServ = new Usersservices();
-    const user = await userServ.getByEmail(email);
-    if (user && (await this.#compare(password, user.password))) {
+    const user = await userServ.asdaddsasadgetByEmail(email);
+    if (user && (await this.#compare(password, user.password))) {asdadsa
       sd;
       return this.#getUserData(user);
     }
